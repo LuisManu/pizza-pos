@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <style>
+            #item-list {
+                height: 350px;
+                overflow-y: scroll;
+            }
+        </style>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">
+                        Pizza point of sale
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <form class="col-sm-9">
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Size</h3>
+                    </div>
+                    <div class="panel-body" data-toggle="buttons">
+                        <label class="btn btn-default btn-lg btn-block"><input type="radio" name="size" value="small">small</label>
+                        <label class="btn btn-default btn-lg btn-block"><input type="radio" name="size" value="medium">medium</label>
+                        <label class="btn btn-default btn-lg btn-block"><input type="radio" name="size" value="large">large</label>
+                        <label class="btn btn-default btn-lg btn-block"><input type="radio" name="size" value="xlarge">x-large</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Toppings</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-6" data-toggle="buttons">
+                            <label class="btn btn-default btn-lg btn-block"><input type="checkbox" name="pepperoni" value="3">pepperoni</label>
+                            <label class="btn btn-default btn-lg btn-block"><input type="checkbox" name="bacon" value="3">bacon</label>
+                            <label class="btn btn-default btn-lg btn-block"><input type="checkbox" name="ham" value="3">ham</label>
+                            <label class="btn btn-default btn-lg btn-block"><input type="checkbox" name="sausage" value="3">sausage</label>
+                        </div>
+
+
+                        <div class="col-sm-6" data-toggle="buttons">
+                            <label class="btn btn-default btn-lg btn-block"><input type="checkbox" name="pineapple" value="2">pineapple</label>
+                            <label class="btn btn-default btn-lg btn-block"><input type="checkbox" name="mushroom" value="2">mushroom</label>
+                            <label class="btn btn-default btn-lg btn-block"><input type="checkbox" name="olive" value="2">olive</label>
+                            <label class="btn btn-default btn-lg btn-block"><input type="checkbox" name="garlic" value="2">garlic</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-block btn-success">Add</button> 
+        </form>
+
+
+
+        <div class="col-sm-3">
+            <div class="panel panel-default clearfix">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Items</h3>
+                </div>
+                <div class="panel-body" id="item-list">
+                    <ul class="list-group" id="items"></ul>
+                </div>
+
+                <div  class="panel-footer">
+                    <h3 style="margin-top:5px;">Total: <span id="total" style="float: right;">$0.00</span></h3>
+
+                    <button class="btn btn-lg btn-block btn-primary" id="finished">Finished</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal" id="size-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <p><h1>NO SIZE SELECTED</h1></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-lg btn-block btn-default" data-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal" id="success-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">SUCCESS</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <p><h1>Order submitted!</h1></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-lg btn-block btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal" id="no-items-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">No items to submit.</h4>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <p><h1>Select a pizza to submit order.</h1></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-lg btn-block btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>
